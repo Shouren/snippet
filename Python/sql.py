@@ -1,14 +1,16 @@
 #! /usr/bin/env python
 
 from sqlalchemy import create_engine
-#from sqlalchemy import and_
+# from sqlalchemy import and_
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String#, func
+from sqlalchemy import Column, Integer, String
+# func
 from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 engine = create_engine('sqlite:///:memory:', echo=True)
 Session = sessionmaker(bind=engine)
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -26,11 +28,13 @@ class User(Base):
         self.department = department
 
     def __repr__(self):
-        return "<User('%s', '%s', '%s', '%s')>" % (self.name, self.fullname, self.password, self.department)
+        return "<User('%s', '%s', '%s', '%s')>"\
+            % (self.name, self.fullname, self.password, self.department)
 
     @classmethod
     def get_name(cls):
         return cls.name
+
 
 class Department(Base):
     __tablename__ = 'department'
@@ -50,24 +54,25 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     session = Session()
 
-    user = User('Sichao', None, 'xiangyoukanqi', 'Design')
-    session.add(user)
-    user = User('miaoge', 'Zhaoyuan', 'miaoge', 'Design')
-    session.add(user)
-    user = User('shouren', 'yangshouren', '0192837465', 'tech')
-    session.add(user)
-    user = User('kezi', 'yukezi', 'ykz', 'research')
-    session.add(user)
-    dep = Department("Design", "BJ")
-    session.add(dep)
-    dep = Department("research", "NYK")
-    session.add(dep)
+    users = [User('sichao', None, 'xiangyoukanqi', 'Design'),
+             User('miaoge', 'Zhaoyuan', 'miaoge', 'Design'),
+             User('shouren', 'yangshouren', '0192837465', 'Tech'),
+             User('kezi', 'yukezi', 'ykz', 'Research')]
+
+    for user in users:
+        session.add(user)
+    deps = [Department("Design", "BJ"),
+            Department("research", "NYK")]
+    for dep in deps:
+        session.add(dep)
     session.commit()
-    #q = session.query(User).outerjoin(Department, and_(User.department==Department.name)).filter(Department.location=="NYK")
-    #for item in q.all():
+    # q = session.query(User)\
+    #     .outerjoin(Department, and_(User.department==Department.name))\
+    #     .filter(Department.location=="NYK")
+    # for item in q.all():
     #    print item
-    q = session.query(User).filter(User.name=='Sichao')
+    q = session.query(User).order_by(User.department, User.name)
     for item in q.all():
         print item
-        if item.fullname == None:
+        if item.fullname is None:
             print 'Equal'
