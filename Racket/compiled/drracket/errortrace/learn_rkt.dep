@@ -1,0 +1,1 @@
+("6.0" ("3ec2e9ab14c9ee0184bdc11b6a4ba8d2c2f199f7" . "a09b3947c6a9b32a3fdf4d30a4bc5fd84060eb5d") (collects #"pict" #"flash.rkt") (collects #"slideshow" #"main.rkt") (collects #"racket" #"runtime-config.rkt") #"/Users/kimi/Library/Racket/planet/300/6.0/cache/schematics/random.plt/1/0/random.rkt")
