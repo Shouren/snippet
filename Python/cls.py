@@ -89,5 +89,19 @@ class KQueueIOLoop(IOLoop):
     def initialize(self, **kwargs):
         print "Hello World"
 
+class property_test(object):
+    def __init__(self):
+        self.name = 'test'
+
+    @property
+    def is_true(self):
+        return True if self.name == 'test' else False
+
 if __name__ == "__main__":
-    ioloop = IOLoop()
+    print 'Class testing'
+    obj = property_test()
+    if obj.is_true:
+        print 'True'
+    else:
+        print False
+
