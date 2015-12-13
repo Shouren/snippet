@@ -14,6 +14,8 @@ conf = config.Config(stream=sys.stdout,
                      traverseNamespace=True,
                      plugins=core.DefaultPluginManager())
 
+var = 0
+
 def setup_env():
     print 'Setting up environment'
 
@@ -23,3 +25,19 @@ def teardown_env():
 @with_setup(setup_env, teardown_env)
 def test():
     print 'Hello World'
+
+def b_test():
+    global var
+    var += 1
+    assert var == 1
+
+def a_test():
+    global var
+    var += 1
+    print var
+    assert var == 3
+
+def c_test():
+    global var
+    var += 1
+    assert var == 3
