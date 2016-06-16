@@ -1,20 +1,26 @@
-class OP(object):
-    self.op = []
+rb_stack = []
 
-def tags(func_b):
-    def tags_decorator(func_a):
-        def func_wrapper(name):
-            return "<{0}>{1}</{0}>".format('test', func_b(name))
+def _roll_back(rb_func):
+    def _fn(func):
+        def func_wrapper(*args, **kwargs):
+            ret = func(*args, **kwargs)
+            print ret
+            if ret is False:
+                rb_func()
+            rb_stack.append(1)
+            return ret
         return func_wrapper
-    return tags_decorator
+    return _fn
 
-def get_text_b(name):
-    return 'hello ' + name
+def test_rb():
+    print 'hello'
 
-@tags(get_text_b)
-def get_text_a(name):
-    return "Hello " + name
+@_roll_back(test_rb)
+def test(a):
+    return False
 
-print get_text_a("John")
+test(1)
 
-# Outputs <p>Hello John</p>
+test(2)
+
+print rb_stack
