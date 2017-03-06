@@ -1,0 +1,9 @@
+[package]
+name = "hyper_test"
+version = "0.1.0"
+authors = ["Shouren Yang <yangshouren@gmail.com>"]
+
+[dependencies]
+hyper = '0.10.0'
+tokio-core = '0.1.4'
+pretty_env_logger = '0.1.0'
