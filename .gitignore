@@ -1,2 +1,5 @@
 *.pyc
 a.out
+
+# For rust code
+Rust/*/target/
