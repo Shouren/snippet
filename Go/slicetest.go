@@ -5,6 +5,13 @@ import (
 )
 
 func main() {
+	var s []int
+	fmt.Println("Len: ", len(s))
+	fmt.Println("Cap: ", cap(s))
+	s = append(s, 3)
+	fmt.Println("Len: ", len(s))
+	fmt.Println("Cap: ", cap(s))
+
 	// Capacity with 2
 	array := make([]int, 0, 2)
 	array = append(array, 1)
