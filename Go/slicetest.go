@@ -35,4 +35,9 @@ func main() {
 	fmt.Println("O: ", array)
 	fmt.Println("C: ", c)
 	fmt.Println("D: ", d)
+
+	test := struct{ Target []string }{Target: []string{}}
+	test.Target = append(test.Target, "Hello")
+	test.Target = append(test.Target, "World")
+	fmt.Println(test.Target)
 }
