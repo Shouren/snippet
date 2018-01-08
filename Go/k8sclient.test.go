@@ -49,9 +49,16 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+	// auth, err := clientset.CoreV1().Services("demo").Get("auth", metav1.GetOptions{})
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Printf("Name: %s, IP: %s", auth.Name, auth.Spec.ClusterIP)
+	// return
 	for {
-		services, err := clientset.CoreV1().Services("").List(metav1.ListOptions{FieldSelector: "metadata.namespace=demo"})
-		// services, err := clientset.CoreV1().Services("").List(metav1.ListOptions{LabelSelector: "kubernetes.io/cluster-service=true"})
+		// services, err := clientset.CoreV1().Services("").List(metav1.ListOptions{FieldSelector: "metadata.namespace=demo"})
+		services, err := clientset.CoreV1().Services("release-3-0-0").List(metav1.ListOptions{LabelSelector: "enable-on-api-gw=true,serviceId=78"})
 		// services, err := clientset.CoreV1().Services("").List(metav1.ListOptions{})
 		if err != nil {
 			panic(err.Error())
