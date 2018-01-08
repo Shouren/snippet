@@ -1,5 +1,7 @@
 *.pyc
 a.out
+*.log
+*.txt
 
 # For rust code
 Rust/*/target/
