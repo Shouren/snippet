@@ -4,6 +4,15 @@ import (
 	"fmt"
 )
 
+type T1 struct {
+	Name string
+}
+
+type T2 struct {
+	T1
+	Type string
+}
+
 type Data struct {
 	Name string
 	Pass string
@@ -19,8 +28,10 @@ func testFunc(a Data) {
 }
 
 func testFunc0(b map[string]Data) {
-	b["test"].Name = "Admin"
-	b["test"].Pass = "12345"
+	d := b["test"]
+	d.Name = "Admin"
+	d.Pass = "12345"
+	b["test"] = d
 }
 
 func main() {
@@ -46,4 +57,14 @@ func main() {
 	fmt.Println("a.Datas[\"test\"]")
 	fmt.Println(a.Datas["test"].Name)
 	fmt.Println(a.Datas["test"].Pass)
+
+	fmt.Println("====== Struct initializers test ======")
+	t2 := T2{
+		T1: T1{
+			Name: "test",
+		},
+		Type: "string",
+	}
+
+	fmt.Println(t2.Name)
 }
