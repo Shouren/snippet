@@ -12,6 +12,15 @@ type TestData struct {
 	Desc string
 }
 
+func (t *TestData) GetByName(db *gorm.DB, name string) error {
+	t.Name = name
+	err := db.First(t).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func main() {
 	user := "root"
 	passwd := "0192837465"
@@ -27,14 +36,18 @@ func main() {
 
 	db.AutoMigrate(&TestData{})
 
-	db.Create(&TestData{
-		Name: "One",
-		Desc: "Test data for gorm, test",
-	})
+	// db.Create(&TestData{
+	// 	Name: "One",
+	// 	Desc: "Test data for gorm, test",
+	// })
 
 	var data TestData
-	db.Where("name = ?", "One").First(&data)
-	fmt.Println(data)
+	err = data.GetByName(db, "One")
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println(data)
+	}
 
 	// db.Delete(&data)
 }
