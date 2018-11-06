@@ -1,12 +1,23 @@
-use std::time::Instant;
-
 extern crate reqwest;
 
+use std::env::var;
+use std::time::Instant;
+use reqwest::Url;
+
+
+
+fn get_proxy_addr() -> String {
+    let default_proxy_addr= "http://127.0.0.1:1087".to_string();
+    let key = "HTTP_PROXY";
+    match var(key) {
+        Ok(val) => return val,
+        Err(_)=> return default_proxy_addr,
+    }
+}
 
 fn main() {
-    println!("Hello, world!");
-
-    let proxy = reqwest::Proxy::https("http://localhost:1087").unwrap();
+    println!("Start proxy testing...");
+    let proxy = reqwest::Proxy::all(Url::parse(get_proxy_addr().as_str()).unwrap()).unwrap();
 
     let client = reqwest::Client::builder().proxy(proxy).build().unwrap();
 
