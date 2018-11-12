@@ -5,10 +5,13 @@ import com.github.kittinunf.fuel.httpGet
 fun main(args: Array<String>) {
     println("Start http probing...")
 
-    var (req, resp, ret) = "https://www.google.com/generate_204".httpGet().responseString()
+    var startTime = System.currentTimeMillis()
+    var (req, resp, _) = "https://www.google.com/generate_204".httpGet().response()
+    var endTime = System.currentTimeMillis()
 
-    println(req)
-    println(resp)
-    println(ret)
-
+    println(message = "->")
+    println(message = "URL: %s".format(req.url))
+    println(message = "<-")
+    println(message = "StatusCode: %s".format(resp.statusCode))
+    println(message = "Latency: %sms".format((endTime - startTime)))
 }
