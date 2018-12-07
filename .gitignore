@@ -12,5 +12,5 @@ Rust/*/target/
 Go/kubeconfig
 
 # For Intellij
-.gradle/
-.idea/
+.gradle
+.idea
