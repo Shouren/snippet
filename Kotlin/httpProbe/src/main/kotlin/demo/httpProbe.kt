@@ -1,17 +1,17 @@
 package demo
 
 import com.github.kittinunf.fuel.httpGet
+import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     println("Start http probing...")
 
-    var startTime = System.currentTimeMillis()
-    var (req, resp, _) = "https://www.google.com/generate_204".httpGet().response()
-    var endTime = System.currentTimeMillis()
+    var msg = ""
 
-    println(message = "->")
-    println(message = "URL: %s".format(req.url))
-    println(message = "<-")
-    println(message = "StatusCode: %s".format(resp.statusCode))
-    println(message = "Latency: %sms".format((endTime - startTime)))
+    val latency = measureTimeMillis {
+        val (req, resp, _ ) = "https://www.google.com/generate_204".httpGet().response()
+        msg = "->\nURL: %s\n<-\nStatusCode : %s\n".format(req.url, resp.statusCode)
+    }
+    println(message = msg)
+    println(message = "Latency: %sms".format((latency)))
 }
