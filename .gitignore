@@ -10,3 +10,7 @@ Rust/*/target/
 
 # For Go code
 Go/kubeconfig
+
+# For Intellij
+.gradle/
+.idea/
