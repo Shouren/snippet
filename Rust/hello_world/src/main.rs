@@ -17,12 +17,16 @@ fn get_proxy_addr() -> String {
 
 fn main() {
     println!("Start proxy testing...");
-    let proxy = reqwest::Proxy::all(Url::parse(get_proxy_addr().as_str()).unwrap()).unwrap();
+    let proxy = reqwest::Proxy::all(
+        Url::parse(
+            get_proxy_addr().as_str()
+        ).expect("Invalid Proxy Config")
+    ).expect("Create Proxy Failed");
 
-    let client = reqwest::Client::builder().proxy(proxy).build().unwrap();
+    let client = reqwest::Client::builder().proxy(proxy).build().expect("Create client failed");
 
     let now = Instant::now();
-    let resp = client.get("https://www.google.com/generate_204").send().unwrap();
+    let resp = client.get("https://www.google.com/generate_204").send().expect("Request Google 204 URL failed");
     let latency = now.elapsed();
 
     println!("Status Code: {:?}", resp.status());
