@@ -3,6 +3,8 @@ use std::time::Instant;
 use reqwest::Url;
 use clap::{Arg, App};
 
+const DEFAULT_TARGET: &str = "https://www.google.com/generate_204";
+
 fn main() {
     let params= App::new("Proxy time measure program")
         .version("0.1.0")
@@ -18,7 +20,7 @@ fn main() {
             .long("target")
             .takes_value(true)
             .help("Target address to send request for measurement")
-            .default_value("https://www.google.com/generate_204"))
+            .default_value(DEFAULT_TARGET))
         .get_matches();
 
     let proxy_addr = params.value_of("proxy").expect("Missing proxy address");
