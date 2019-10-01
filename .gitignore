@@ -3,8 +3,14 @@ a.out
 *.log
 *.txt
 
+.DS_Store
+
 # For rust code
 Rust/*/target/
 
 # For Go code
 Go/kubeconfig
+
+# For Intellij
+.gradle
+.idea
